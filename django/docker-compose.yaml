@@ -1,4 +1,8 @@
 version: "3.9"
+x-environment:
+  &default-environment
+  env_file:
+    - .env
 
 services:
   web:
@@ -12,3 +16,19 @@ services:
       - 8080:8080
       - 8888:8888
       - 9000:9000
+    << : *default-environment
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - vol-db:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+    << : *default-environment
+
+volumes:
+  vol-db:
