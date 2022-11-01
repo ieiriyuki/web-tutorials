@@ -1,4 +1,6 @@
 .*
 docker-compose.yaml
+docker-compose.override.yaml
 Dockerfile
 poetry.lock
+*.sqlite3
