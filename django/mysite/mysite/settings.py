@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,7 +82,6 @@ DATABASES = {
         'PASSWORD': os.environ['POSTGRES_PASSWORD'],
         'PORT': '5432',
         'USER': 'mysite',
-        'NAME': 'mysite'
     }
 }
 
