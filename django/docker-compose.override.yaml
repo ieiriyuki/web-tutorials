@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      args:
+        INSTALL_OPTION: "--with dev"
+    volumes:
+      - ./mysite:/app/mysite
+    stdin_open: true
+    tty: true

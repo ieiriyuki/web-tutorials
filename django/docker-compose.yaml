@@ -4,9 +4,11 @@ services:
   web:
     build:
       context: .
-
-  db:
-    build:
-      images: postgresql:14
-    env_file:
-      - .env
+      args:
+        INSTALL_OPTION: "--without dev"
+    container_name: web
+    ports:
+      - 8000:8000
+      - 8080:8080
+      - 8888:8888
+      - 9000:9000
