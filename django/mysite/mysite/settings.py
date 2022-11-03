@@ -82,7 +82,10 @@ DATABASES = {
         'PASSWORD': os.environ['POSTGRES_PASSWORD'],
         'PORT': '5432',
         'USER': 'mysite',
-    }
+        'TEST': {
+            'NAME': 'test_database',
+        },
+    },
 }
 
 
