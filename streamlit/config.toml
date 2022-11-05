@@ -1,0 +1,13 @@
+[server]
+port = 8888
+
+[browser]
+serverAddress = "0.0.0.0"
+gatherUsageStats = false
+
+[theme]
+# primaryColor="#012345"
+backgroundColor="#FEFEFE"
+secondaryBackgroundColor="#F6F0F2"
+textColor="#123456"
+font="sans serif"
