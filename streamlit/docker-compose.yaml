@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  app:
+    image: my-streamlit
+    build:
+      context: .
+    container_name: app
+    volumes:
+      - ./main.py:/app/main.py
+      - ./config.toml:/app/.streamlit/config.toml
+    ports:
+      - 8888:8888
+    stdin_open: true
+    tty: true
