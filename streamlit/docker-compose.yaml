@@ -8,8 +8,11 @@ services:
     container_name: app
     volumes:
       - ./main.py:/app/main.py
+      - ./pages:/app/pages
+      - ./data:/app/data
       - ./config.toml:/app/.streamlit/config.toml
     ports:
       - 8888:8888
     stdin_open: true
     tty: true
+    command: [ "streamlit", "run", "main.py" ]
