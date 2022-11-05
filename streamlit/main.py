@@ -7,6 +7,7 @@ import streamlit as st
 
 st.write('Here is our first attempt at using data to create a table.')
 
+st.sidebar.markdown("# Main page")
 add_selectbox = st.sidebar.selectbox(
     "How would you like?",
     ("Email", "Phone", "Twitter")
