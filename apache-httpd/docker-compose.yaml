@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  httpd:
+    image: httpd:2.4
+    volumes:
+      - ./index.html:/usr/local/apache2/htdocs/index.html
+      - ./style.css:/usr/local/apache2/htdocs/style.css
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
+    ports:
+      - 8080:80
