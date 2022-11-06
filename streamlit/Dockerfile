@@ -1,10 +1,8 @@
-FROM python:3.10
+FROM python:3.10-slim
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
+COPY . .
 
 RUN pip install -U pip \
     && pip install -r requirements.txt
-
-COPY config.toml .streamlit/config.toml
