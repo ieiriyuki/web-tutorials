@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  app:
+    image: my-streamlit
+    build:
+      context: .
+    container_name: app
+    volumes:
+      - ./main.py:/app/main.py
+      - ./pages:/app/pages
+      - ./mymodule:/app/mymodule
+      - ./settings:/app/settings
+      - ./data:/app/data
+      - ./.streamlit/config.toml:/app/.streamlit/config.toml
+    ports:
+      - 8888:8888
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    command: [ "streamlit", "run", "main.py" ]
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - vol-db:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - ./db/init:/docker-entrypoint-initdb.d
+    env_file:
+      - ./db/.env
+
+volumes:
+  vol-db:
