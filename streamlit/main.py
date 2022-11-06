@@ -1,6 +1,7 @@
 import random
 import time
 
+import mysql.connector
 import pandas as pd
 import streamlit as st
 
@@ -98,5 +99,27 @@ word
 
 if "shared" not in st.session_state:
     st.session_state["shared"] = True
+
+
+@st.experimental_singleton
+def init_connection():
+    return mysql.connector.connect(**st.secrets["mysql"])
+
+
+@st.experimental_memo(ttl=600)
+def run_query(query):
+    with conn.cursor() as cur:
+        cur.execute(query)
+        return cur.fetchall()
+
+
+conn = init_connection()
+
+query = """select *
+from awesome_table;
+"""
+rows = run_query(query)
+for row in rows:
+    st.write(row)
 
 # eof
