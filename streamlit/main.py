@@ -85,10 +85,18 @@ with right_column:
 
 latest_iteration = st.empty()
 bar = st.progress(0)
-for i in range(100):
+for i in range(50):
     latest_iteration.text(f"iteration {i + 1}")
     bar.progress(i + 1)
-    time.sleep(0.2)
+    time.sleep(0.1)
 
+
+from mymodule import say_foo
+
+word = say_foo()
+word
+
+if "shared" not in st.session_state:
+    st.session_state["shared"] = True
 
 # eof
