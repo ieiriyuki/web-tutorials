@@ -10,10 +10,13 @@ services:
       - ./main.py:/app/main.py
       - ./pages:/app/pages
       - ./mymodule:/app/mymodule
+      - ./settings:/app/settings
       - ./data:/app/data
       - ./.streamlit/config.toml:/app/.streamlit/config.toml
     ports:
       - 8888:8888
+    depends_on:
+      - db
     stdin_open: true
     tty: true
     command: [ "streamlit", "run", "main.py" ]
