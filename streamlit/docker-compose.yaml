@@ -9,8 +9,9 @@ services:
     volumes:
       - ./main.py:/app/main.py
       - ./pages:/app/pages
+      - ./mymodule:/app/mymodule
       - ./data:/app/data
-      - ./config.toml:/app/.streamlit/config.toml
+      - ./.streamlit/config.toml:/app/.streamlit/config.toml
     ports:
       - 8888:8888
     stdin_open: true
