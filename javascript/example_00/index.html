@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+https://developer.mozilla.org/ja/docs/Learn/JavaScript/First_steps/A_first_splash
+-->
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>Sample</title>
+</head>
+
+<body>
+  <h1>数字当てゲーム</h1>
+  <p>
+    1から100までの数字を当ててみて!
+    10回以内にあてられるでしょうか。
+    選んだ数字が大きいか小さいかを表示します。
+  </p>
+  <div class="form">
+    <label for="guessField">予想を入力してください: </label>
+    <input type="text" id="guessField" class="guessField">
+    <input type="submit" value="予想を投稿" class="guessSubmit">
+  </div>
+  <div class="resultParas">
+    <p class="guesses"></p>
+    <p class="lastResult"></p>
+    <p class="lowOrHi"></p>
+  </div>
+  <script src="sample.js"></script>
+</body>
+
+</html>
