@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  app:
+    image: my-drf
+    build:
+      context: .
+    ports:
+      - 80:80
+      - 8000:8000
+      - 8080:8080
+      - 8888:8888
+    volumes:
+      - ./:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true
