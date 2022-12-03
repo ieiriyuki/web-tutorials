@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  app:
+    image: my-jyhub
+    build:
+      context: .
+    ports:
+      - 8000:8000
+      - 8081:8081
+      - 9443:9443
