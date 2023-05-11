@@ -1,0 +1,12 @@
+services:
+  app:
+    image: dashapp
+    build: .
+    environment:
+      - PORT=80
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/app/src
+    stdin_open: true
+    tty: true
