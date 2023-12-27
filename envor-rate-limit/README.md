@@ -30,3 +30,6 @@ docker run --rm -it \
 ## local rate limit
 
 https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/local_ratelimit
+
+- `git clone git@github.com:envoyproxy/envoy`
+
