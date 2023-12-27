@@ -25,3 +25,6 @@ docker run --rm -it \
     -c /etc/envoy/envoy.yaml \
     --config-yaml "$(cat envoy-override.yaml)"
 
+## local rate limit
+
+https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/local_ratelimit
