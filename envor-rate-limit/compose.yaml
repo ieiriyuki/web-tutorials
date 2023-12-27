@@ -8,3 +8,13 @@ services:
       - ./envoy-override.yaml:/opt/envoy-override.yaml
     stdin_open: true
     tty: true
+
+  api_ext:
+    image: api_ext
+    build:
+      context: ./api_ext
+    ports:
+      - 8000:8000
+
+networks:
+  envoy-network:
