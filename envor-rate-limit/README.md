@@ -6,6 +6,7 @@ try rate limit
 
 https://www.envoyproxy.io/docs/envoy/latest/start/quick-start/
 
+```
 docker run --rm -it -p 9901:9901 -p 10000:10000 envoyproxy/envoy:v1.28-latest
 
 docker run --rm -it \
@@ -24,6 +25,7 @@ docker run --rm -it \
     --mode validate \
     -c /etc/envoy/envoy.yaml \
     --config-yaml "$(cat envoy-override.yaml)"
+```
 
 ## local rate limit
 
