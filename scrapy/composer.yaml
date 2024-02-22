@@ -1,0 +1,10 @@
+services:
+  scrapy:
+    image: scrapy
+    build:
+      context: .
+    volumes:
+      - ./tomamu:/app/tomamu
+    stdin_open: true
+    tty: true
+    command: bash
