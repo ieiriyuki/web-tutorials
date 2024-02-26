@@ -1,0 +1,2 @@
+Scrapy>=2,<3
+ruff
