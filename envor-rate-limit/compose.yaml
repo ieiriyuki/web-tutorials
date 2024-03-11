@@ -1,0 +1,20 @@
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.28-latest
+    ports:
+      - 9903:9903
+      - 10000:10000
+    volumes:
+      - ./envoy-override.yaml:/opt/envoy-override.yaml
+    stdin_open: true
+    tty: true
+
+  api_ext:
+    image: api_ext
+    build:
+      context: ./api_ext
+    ports:
+      - 8000:8000
+
+networks:
+  envoy-network:
