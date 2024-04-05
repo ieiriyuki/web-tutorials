@@ -1,0 +1,9 @@
+services:
+  selenium:
+    image: selenium:dev
+    build:
+      context: .
+    volumes:
+      - ./main.py:/app/main.py
+    stdin_open: true
+    tty: true
