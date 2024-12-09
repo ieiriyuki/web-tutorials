@@ -1,0 +1,14 @@
+services:
+  web:
+    image: flask-log:dev
+    build: .
+    entrypoint: ["flask", "--app", "main", "run", "--host", "0.0.0.0"]
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./main.py:/app/main.py
+    environment:
+      FLASK_ENV: development
+      FLASK_APP: app.py
+    stdin_open: true
+    tty: true
