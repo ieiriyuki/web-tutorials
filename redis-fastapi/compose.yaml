@@ -1,0 +1,21 @@
+services:
+  app:
+    image: sample
+    build:
+      context: .
+    ports:
+      - 8888:8000
+    depends_on:
+      - redis
+    volumes:
+      - ./app:/app
+
+  redis:
+    image: redis:6.2.18
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
