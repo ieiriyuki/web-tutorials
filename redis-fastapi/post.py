@@ -1,39 +1,59 @@
-import urllib.request
-import urllib.parse
-import json
+import asyncio
+import csv
+from datetime import datetime, timedelta, timezone
+from random import randint
+import aiohttp
 
 
-def post_to_localhost():
-    url = "http://localhost:8888/"  # Example endpoint, adjust as needed
+async def post_to_localhost(id=0, amount=200, request_id=0):
+    url = "http://app:8000/"
+    await asyncio.sleep(randint(0, 3))
+    started_at = datetime.now(tz=timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S")
 
-    # Example data to send (can be any dictionary)
     data_dict = {
-        "id": 0,
-        "amount": 200,
+        "id": id,
+        "amount": amount,
     }
 
-    # Encode the data to bytes
-    data_encoded = json.dumps(data_dict).encode('utf-8')
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, json=data_dict) as response:
+            response_data = await response.json()
 
-    # Create the request object
-    req = urllib.request.Request(url, data=data_encoded, method='POST')
-    req.add_header('Content-Type', 'application/json') # Specify content type as JSON
+    responded_at = datetime.now(tz=timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S")
+    result = {
+        "request_id": request_id,
+        "started_at": started_at,
+        "responded_at": responded_at,
+        "id": id,
+        "amount": amount,
+        "result": response_data.get("result"),
+        "current_credit": response_data.get("current_credit"),
+        "total_credit": response_data.get("total_credit"),
+    }
+    return result
 
-    try:
-        with urllib.request.urlopen(req) as response:
-            response_data = response.read()
-            status_code = response.getcode()
-            print(f"Response status code: {status_code}")
-            print(f"Response data: {response_data.decode('utf-8')}")
-    except urllib.error.HTTPError as e:
-        print(f"HTTP Error: {e.code} {e.reason}")
-        print(f"Response body: {e.read().decode('utf-8') if e.fp else 'No response body'}")
-    except urllib.error.URLError as e:
-        print(f"URL Error: {e.reason}")
-    except ConnectionRefusedError:
-        print(f"Connection Refused: Ensure the server is running at {url}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+
+async def main():
+    tasks = []
+    async with asyncio.TaskGroup() as tg:
+        num_id = 8
+        for _id in range(num_id):
+            for num in range(8):
+                request_id = num + _id * num_id
+                tasks.append(tg.create_task(post_to_localhost(id=_id, amount=200, request_id=request_id)))
+
+    results = [task.result() for task in tasks]
+    sorted_results = sorted(
+        sorted(results, key=lambda x: x["responded_at"]),
+        key=lambda x: x["id"]
+    )
+    return sorted_results
+
 
 if __name__ == "__main__":
-    post_to_localhost()
+    result = asyncio.run(main())
+    with open("./data/result.csv", "w") as f:
+        writer = csv.DictWriter(f, fieldnames=["request_id", "started_at", "responded_at", "id", "amount", "result", "current_credit", "total_credit"])
+        writer.writeheader()
+        for row in result:
+            writer.writerow(row)

@@ -3,12 +3,21 @@ services:
     image: sample
     build:
       context: .
+      target: app
     ports:
       - 8888:8000
     depends_on:
       - redis
     volumes:
       - ./app:/app
+
+  client:
+    image: client
+    build:
+      context: .
+      target: client
+    volumes:
+      - ./data:/client/data
 
   redis:
     image: redis:6.2.18
